@@ -8,8 +8,6 @@ FONE_COLOR = (155, 155, 155)
 FPS = 30
 pg.init()
 pygame.display.set_caption("_First_ Ball game")
-firstIcon = pygame.image.load('1.png')
-pygame.display.set_icon(firstIcon)
 
 f_score = pg.font.Font(None, 36)
 f_good_click = pg.font.Font(None, 24)
