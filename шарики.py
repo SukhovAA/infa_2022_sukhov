@@ -22,7 +22,7 @@ class Ball:
         self.speed_x = randint(-speed_max, speed_max)
         self.speed_y = randint(-speed_max, speed_max)
         self.timeCreate = pg.time.get_ticks()
-        colors = [(255, 0, 0), (0, 255, 0)]
+        colors = [(255, 0, 0), (0, 0, 255)]
         type = randint(0, 1)
         self.type = type
         self.color = colors[type]
@@ -56,9 +56,15 @@ class Ball:
         """
         Возращает количество очков за мячик
         """
+        a = 2
         if self.type == 1:
-            return 1
-        return 3
+            a = 1
+        if good_click_count >= 5:
+            return a*5
+        return a*(good_click_count + 1)
+
+
+
 
     def render(self, surface : pg.Surface):
         """
@@ -81,7 +87,7 @@ class Ball:
             self.speed_y = randint(-self.speed_max, 0)
 
 class Word:
-    click_words = ["Good", "Nice", "Great", "Perfect", "WOW"]
+    click_words = ["", "Double Kill", "Triple Kill", "Mega Kill", "Rampage"]
     timeLive = 1000
 
     def __init__(self, countGoodClick : int, time, position):
@@ -146,10 +152,13 @@ def Click(position):
             CreateWord(good_click_count, position)
             isGoodClick = True
             break
+
     if isGoodClick:
         good_click_count += 1
     else:
         good_click_count = 0
+        score -= 1
+        textScore = f_score.render("Счет: " + str(score), True, (0, 0, 0))
 
 
 
